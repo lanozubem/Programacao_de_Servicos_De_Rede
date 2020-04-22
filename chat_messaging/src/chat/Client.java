@@ -264,7 +264,7 @@ public class Client extends javax.swing.JFrame {
                     break;
             }
         } catch (IOException e) {
-            System.out.println("Error em -----> "+e);
+            exibirMsg.setText("Impossível enviar dados -----> "+e);
         }
     }//GEN-LAST:event_btnEnviarMouseClicked
 
@@ -278,7 +278,7 @@ public class Client extends javax.swing.JFrame {
             fluxoDeSaida.writeUTF("\n"+horaFormatada+"_ CLIENTE: "+smile);
             exibirMsg.setText(exibirMsg.getText()+"\n"+horaFormatada+"_ EU: "+smile);
         } catch (IOException e) {
-            System.out.println("Error em -----> "+e);
+            exibirMsg.setText("Error ao enviar emoji -----> "+e);
         }
     }//GEN-LAST:event_emoji_smileMouseClicked
 
@@ -292,7 +292,7 @@ public class Client extends javax.swing.JFrame {
             fluxoDeSaida.writeUTF("\n"+horaFormatada+"_ CLIENTE: "+heart);
             exibirMsg.setText(exibirMsg.getText()+"\n"+horaFormatada+"_ EU: "+heart);
         } catch (IOException e) {
-            System.out.println("Error em -----> "+e);
+            exibirMsg.setText("Error ao enviar emoji -----> "+e);
         }
     }//GEN-LAST:event_emoji_heartMouseClicked
 
@@ -301,7 +301,7 @@ public class Client extends javax.swing.JFrame {
         try {
             fluxoDeSaida.writeUTF("alerta");
         } catch (IOException e) {
-            System.out.println("Impossivel enviar alerta! Motivo ===> "+e);
+            exibirMsg.setText("Alerta não enviado -----> "+e);
         }
     }//GEN-LAST:event_btn_alertMouseClicked
 
@@ -349,13 +349,13 @@ public class Client extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new RunnableImpl());
       
-        //Bloco responsável pelo recebimento de dados do servidor
         try {
             socketClient = new Socket("localhost", (5050));
             
             fluxoDeEntrada = new DataInputStream(socketClient.getInputStream());
             fluxoDeSaida = new DataOutputStream(socketClient.getOutputStream());
             
+            //Bloco responsável pelo recebimento de dados do servidor
             msgAserRecebida = "";
             while(!msgAserRecebida.equals("sair")){
                 msgAserRecebida = fluxoDeEntrada.readUTF();
@@ -381,7 +381,7 @@ public class Client extends javax.swing.JFrame {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error em -----> "+e);
+            System.out.println("Erro em -----> "+e);
         }
         
     }
